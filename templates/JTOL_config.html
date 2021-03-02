@@ -1,0 +1,14 @@
+{% from "macros.html" import dictII2html with context %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/styles/JTOL_config.css') }}">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST">
+    {{dictII2html(lib, lib_config)}}
+</form>
+</body>
+</html>

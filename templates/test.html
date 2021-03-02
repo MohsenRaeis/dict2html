@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='../static/styles/home.css') }}">
+    <title>Title</title>
+</head>
+<body>
+<form method="POST">
+    <h1>{{lib_config['name']}}</h1>
+    <div class="container">
+        <style>
+.container {
+  display: grid;
+  grid-template-columns: repeat({{lib_config['columns']}}, {{lib_config['max_key_len']}}px {{lib_config['max_value_len']}}px 50px);
+    grid-column-gap: 25px;
+      grid-row-gap: 10px;
+
+}
+        </style>
+        {%for _ in range(lib_config['columns'])%}
+      <h3>Key</h3>
+        <h3>Value</h3>
+        <h3> </h3>
+        {%endfor%}
+    {%for key in lib.keys() %}
+        {%if lib_config["key_edit"]%}
+            <input type="text" value={{key}}>
+        {%else%}
+            <label>{{key}}</label>
+        {%endif%}
+        {%if lib_config['val_edit']%}
+            <input type="text" name="{{key}}" value={{lib[key]}}>
+        {%else%}
+            <label>{{lib[key]}}</label>
+        {%endif%}
+    <button class="button1" name="pop" value="{{key}}">Pop</button>
+    {%endfor%}
+    <input type="text" placeholder="key" name="__Key__">
+    <input type="text" placeholder="value" name="__Value__">
+    <button class="button1" name="add">Add</button>
+        </div>
+    <br>
+    <div class="submit"><input type="submit" name='submit' value="Submit"></div>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{%macro dictionary2html(lib, lib_config)%}
+<h1>{{lib_config['name']}}</h1>
+<div class="container">
+    <style>
+        .container {
+          display: grid;
+          grid-template-columns: repeat({{lib_config['columns']}}, {{lib_config['max_key_len']}}px {{lib_config['max_value_len']}}px 50px);
+            grid-column-gap: 25px;
+              grid-row-gap: 10px;
+
+        }
+    </style>
+    {%for _ in range(lib_config['columns'])%}
+    <h3>Key</h3>
+    <h3>Value</h3>
+    <h3> </h3>
+    {%endfor%}
+    {%for key in lib.keys() %}
+    {%if lib_config["key_edit"]%}
+    <input type="text" value={{key}}>
+    {%else%}
+    <label>{{key}}</label>
+    {%endif%}
+    {%if lib_config['val_edit']%}
+    <input type="text" name="{{key}}" value={{lib[key]}}>
+    {%else%}
+    <label>{{lib[key]}}</label>
+    {%endif%}
+    <button class="button1" name="pop" value="{{key}}">Pop</button>
+    {%endfor%}
+    <input type="text" placeholder="Key..." name="__Key__">
+    <input type="text" placeholder="Value..." name="__Value__">
+    <button class="button1" name="add">Add</button>
+</div>
+<br>
+<div class="submit"><input type="submit" name="__Submit__" value="Submit"></div>
+{%endmacro%}
+
+{%macro dictII2html(lib, lib_config)%}
+<h1>{{lib_config['name']}}</h1>
+{%for key1 in lib%}
+<input type="text" value="{{key1}}" style="width: 200px; font-size: 24px; font-family: 'Times New Roman', Times, serif;">
+<div class="container">
+    <style>
+        .container {
+          display: grid;
+          grid-template-columns: repeat({{lib_config['columns']}}, {{lib_config['max_key_len']}}px {{lib_config['max_value_len']}}px);
+            grid-column-gap: 25px;
+              grid-row-gap: 10px;
+
+        }
+    </style>
+
+    {%for _ in range(lib_config['columns'])%}
+    <h4>Key</h4>
+    <h4>Value</h4>
+    {%endfor%}
+    {%for key in lib[key1].keys() %}
+
+    {%if lib_config["key_edit"]%}
+    <input type="text" value='{{key}}'>
+    {%else%}
+    <label>{{key}}</label>
+    {%endif%}
+    {%if lib_config['val_edit']%}
+    <input type="text" name="{{key}}" value='{{lib[key1][key]}}'>
+    {%else%}
+    <label>{{lib[key]}}</label>
+    {%endif%}
+
+    {%endfor%}
+    <button class="button1" name="pop" value="{{key1}}">Pop</button>
+</div>
+<br>
+{%endfor%}
+<br>
+<input type="text" style= "width: 200px" placeholder="Key..." name="__Key__">
+<button class="button1" name="add">Add</button>
+<div class="submit"><input type="submit" name="__Submit__" value="Submit"></div>
+{%endmacro%}
